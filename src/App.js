@@ -45,6 +45,15 @@ export default function App() {
                         Album layout
                     </Typography>
                 </Toolbar>
+                <Stack
+                    sx={{ pt: 0, pr:0}}
+                    direction= "row"
+                    spacing={2}
+                    justifyContent="right"
+                >
+                    <Button variant="contained">Ingresar</Button>
+                    <Button variant="contained">Registrarse</Button>
+                </Stack>
             </AppBar>
             <main>
                 {/* Hero unit */}
