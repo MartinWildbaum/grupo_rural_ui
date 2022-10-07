@@ -38,18 +38,28 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function App() {
+export default function Routing(){
+    return(
+        <Routes>
+            <Route exact path="/" element={<App />} />
+            <Route exact path="/signIn" element={<SignInSide />} />
+            <Route exact path="/signUp" element={<SignUp />} />
+        </Routes>
+    )
+}
+
+function App() {
 
     const navigate = useNavigate();
 
     const navigateToSignIn = () => {
         // 👇️ navigate to /SignIn
-        navigate('src/sign-in/signIn.js', {replace: true});
+        navigate('/signIn', {replace: false});
     };
 
     const navigateToSignUp = () => {
         // 👇️ navigate to /
-        navigate('src/sign-up/signUp.js',{replace: true});
+        navigate('/signUp',{replace: false});
     };
 
     return (
@@ -68,10 +78,7 @@ export default function App() {
                     <Button variant="contained"
                             onClick={navigateToSignUp}
                     >Registrarse</Button>
-                    <Routes>
-                        <Route path="src/sign-in/signIn.js" element={<SignInSide />} />
-                        <Route path="src/sign-up/signUp.js" element={<SignUp />} />
-                    </Routes>
+
                 </Stack>
             </AppBar>
             <main>
