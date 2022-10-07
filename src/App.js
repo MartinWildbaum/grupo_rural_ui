@@ -16,6 +16,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import SignInSide from "./sign-in/signIn";
+import SignUp from "./sign-up/signUp";
+
 
 function Copyright() {
     return (
@@ -35,24 +39,39 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const theme = createTheme();
 
 export default function App() {
+
+    const navigate = useNavigate();
+
+    const navigateToSignIn = () => {
+        // 👇️ navigate to /SignIn
+        navigate('src/sign-in/signIn.js', {replace: true});
+    };
+
+    const navigateToSignUp = () => {
+        // 👇️ navigate to /
+        navigate('src/sign-up/signUp.js',{replace: true});
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppBar position="relative">
-                <Toolbar>
-                    <CameraIcon sx={{ mr: 2 }} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Album layout
-                    </Typography>
-                </Toolbar>
                 <Stack
-                    sx={{ pt: 0, pr:0}}
+                    sx={{ pt: 1, pr:1, pb:1, pl:1}}
                     direction= "row"
                     spacing={2}
                     justifyContent="right"
                 >
-                    <Button variant="contained">Ingresar</Button>
-                    <Button variant="contained">Registrarse</Button>
+                    <Button variant="contained"
+                            onClick={navigateToSignIn}
+                    >Ingresar</Button>
+                    <Button variant="contained"
+                            onClick={navigateToSignUp}
+                    >Registrarse</Button>
+                    <Routes>
+                        <Route path="src/sign-in/signIn.js" element={<SignInSide />} />
+                        <Route path="src/sign-up/signUp.js" element={<SignUp />} />
+                    </Routes>
                 </Stack>
             </AppBar>
             <main>
