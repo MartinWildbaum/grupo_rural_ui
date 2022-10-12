@@ -17,8 +17,8 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import SignInSide from "./sign-in/signIn";
-import SignUp from "./sign-up/signUp";
+import SignInSide from "./components/sign-in/signIn";
+import SignUp from "./components/sign-up/signUp";
 
 
 function Copyright() {
