@@ -12,23 +12,42 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Autocomplete from '@mui/material/Autocomplete';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton';
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{' '}
+            {'Copyright © MooUy SA '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
     );
 }
 
+
+const months =
+    ["1","2","3","4","5","6","7","8","9","10","11","12"];
+
+let days = Array.from({length: 31 }, (x, i) => String(i+1));
+
+let years = Array.from({length: (new Date().getFullYear()) - 1899 }, (x, i) => String(i+1900));
+
+
+
+
+
+
 const theme = createTheme();
 
 export default function SignUp() {
+    const [alignment, setAlignment] = React.useState('web');
+
+    const handleChange = (event, newAlignment) => {
+            setAlignment(newAlignment);
+            console.log("hola");
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -54,18 +73,18 @@ export default function SignUp() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Registrarse
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="given-name"
+                                    autoComplete="name"
                                     name="firstName"
                                     required
                                     fullWidth
                                     id="firstName"
-                                    label="First Name"
+                                    label="Nombre Completo"
                                     autoFocus
                                 />
                             </Grid>
@@ -73,10 +92,42 @@ export default function SignUp() {
                                 <TextField
                                     required
                                     fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
+                                    id="username"
+                                    label="Nombre de Usuario"
+                                    name="username"
+                                    autoComplete="username"
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12}>
+                                <Typography variant="caption">
+                                    {'Fecha de Nacimiento'}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Autocomplete
+                                    disablePortal
+                                    id="byear"
+                                    name="byear"
+                                    options={years}
+                                    renderInput={(params) => <TextField {...params} label="Año" />}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <Autocomplete
+                                    disablePortal
+                                    id="bmonth"
+                                    name="bmonth"
+                                    options={months}
+                                    renderInput={(params) => <TextField {...params} label="Mes" />}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
+                                <Autocomplete
+                                    disablePortal
+                                    id="bday"
+                                    name="bday"
+                                    options={days}
+                                    renderInput={(params) => <TextField {...params} label="Día" />}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -84,7 +135,7 @@ export default function SignUp() {
                                     required
                                     fullWidth
                                     id="email"
-                                    label="Email Address"
+                                    label="Correo Electrónico"
                                     name="email"
                                     autoComplete="email"
                                 />
@@ -94,18 +145,44 @@ export default function SignUp() {
                                     required
                                     fullWidth
                                     name="password"
-                                    label="Password"
+                                    label="Contraseña"
                                     type="password"
                                     id="password"
                                     autoComplete="new-password"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    name="ci"
+                                    required
+                                    fullWidth
+                                    id="ci"
+                                    label="Cédula de Identidad"
                                 />
                             </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="tel"
+                                    label="Teléfono"
+                                    name="tel"
+                                    autoComplete="phone"
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12}>
+                                <ToggleButtonGroup
+                                    fullWidth
+                                    exclusive
+                                    value={alignment}
+                                    onChange={handleChange}
+                                    color="primary"
+                                >
+                                    <ToggleButton value="comprador">Comprador</ToggleButton>
+                                    <ToggleButton value="productor">Productor</ToggleButton>
+                                </ToggleButtonGroup>
+                            </Grid>
+
                         </Grid>
                         <Button
                             type="submit"
@@ -113,12 +190,12 @@ export default function SignUp() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Registrarse
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link href={"/SignIn"} variant="body2">
-                                    Already have an account? Sign in
+                                    "¿Ya tienes una cuenta? ¡Inicia Sesión!"
                                 </Link>
                             </Grid>
                         </Grid>
