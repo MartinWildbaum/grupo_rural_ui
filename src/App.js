@@ -74,7 +74,7 @@ function App() {
                 >
                     <Button variant="contained"
                             onClick={navigateToSignIn}
-                    >Ingresar</Button>
+                    >Iniciar sesión</Button>
                     <Button variant="contained"
                             onClick={navigateToSignUp}
                     >Registrarse</Button>
